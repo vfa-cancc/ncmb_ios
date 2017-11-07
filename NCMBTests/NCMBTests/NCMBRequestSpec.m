@@ -74,25 +74,12 @@ describe(@"NCMBRequest", ^{
         NSString *urlStr = @"https://mb.api.cloud.nifty.com/2013-09-01/classes/TestClass/mockObjectId";
         NSURL *url = [NSURL URLWithString:urlStr];
         
-        NSString *expectTimeStamp = @"2013-12-02T02:44:35.452Z";
-        id requestMock = OCMClassMock([NCMBRequest class]);
-        OCMStub([requestMock returnTimeStamp]).andReturn(expectTimeStamp);
-        
-        NSString *expectSessionToken = @"testSessionToken";
-        OCMStub([requestMock returnSessionToken]).andReturn(expectSessionToken);
-        
         NCMBRequest *request = [[NCMBRequest alloc] initWithURL:url
                                                          method:@"PUT"
                                                          header:nil
                                                        bodyData:@{}.mutableCopy];
         NSData *bodyData = [request HTTPBody];
         expect(bodyData).to.equal(@{}.mutableCopy);
-        
-        expect([headers objectForKey:@"X-NCMB-Timestamp"]).to.equal(expectTimeStamp);
-        
-        expect([headers objectForKey:@"X-NCMB-Apps-Session-Token"]).to.equal(expectSessionToken);
-        
-        expect([headers objectForKey:@"Content-Type"]).to.equal(@"application/json");
     });
     
     afterEach(^{
