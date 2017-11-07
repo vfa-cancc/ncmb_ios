@@ -78,7 +78,6 @@ describe(@"NCMBRequest", ^{
                                                          method:@"PUT"
                                                          header:nil
                                                        bodyData:@{}.mutableCopy];
-
         NSData *bodyData = [request HTTPBody];
         expect(bodyData).to.equal(@{}.mutableCopy);
     });
